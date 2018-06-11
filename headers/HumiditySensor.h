@@ -14,22 +14,22 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-HumiditySensor.h
+//-----------------------------------------------------------------------------
+//                 Class      : HumiditySensor.h
+//                 Description: Abstract sensor class  to be implemented by all
+//                              humidity sensor devices
+//-----------------------------------------------------------------------------
+
 */
 
-class HumiditySensor
+class HumiditySensor : public Sensor
 {
-
-	protected:
-	    double humidity;
-
 	public:
-	    HumiditySensor(double humid) : humidity(humid)
-	    {
-	    }
 	    //constructor
-	    virtual void calculateHumidity() = 0;
-	    virtual double getHumidity() = 0;
-	    virtual void setHumidity() = 0;
+	    HumiditySensor(int id, std::string sensorModel);
+		virtual std::string sToJSONString() = 0;
+		virtual bool SendData(std::string *sResults) = 0;
+		virtual bool ReadData(std::string *sResults) = 0;
+	    virtual double CalculateHumidity() = 0;
 	
 };

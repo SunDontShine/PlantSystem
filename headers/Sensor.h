@@ -14,34 +14,32 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Sensor.h
-Abstract class to be implemented by all sensor devices
+//-----------------------------------------------------------------------------
+//                 Class      : Sensor.h
+//                 Description: Abstract sensor class  to be implemented by all
+//                              sensor devices
+//-----------------------------------------------------------------------------
+
 */
 
 #include <string>
 
 class Sensor
 {
-
+    public:
+	    Sensor(int id, std::string sensorModel);
+        virtual bool Init() = 0;
+	    virtual std::string sToJSONString() = 0;
+	    virtual bool SendData(std::string *sResults) = 0;		
+		virtual bool ReadData(std::string *sResults) = 0;
+		
+		
 	protected:
-	    int deviceID;
+	    int m_nDeviceId;
 	    //identifies this device
-
-	    std::string model;
+	    std::string sModel;
 	    //the model of this device
 
-	    int category[];
-	    //category signifies readings covered by this sensor
-	    //revert to readme.txt for values representing cata categories
-
-	public:
-	    Sensor(int id, std::string sensorModel);
-	    //constructor
-
-	    virtual std::string toJSONString() = 0;
-	    //translates on members to JSON format
-
-	    virtual void sendData() = 0;
-	    //sends data to server;
-
+	   double m_fMaxRangeValue;
+	   double m_fMinRangeValue;
 };
